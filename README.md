@@ -1,4 +1,5 @@
 # Elevates Labs Cybersecurity Internship
+<img width="1920" height="1080" alt="banner" src="https://github.com/user-attachments/assets/9760f6c8-b190-49ad-bfa9-688393b03ddf"/>
 
 Welcome to the Cybersecurity Internship Repository for the ElevateLabs Cybersec Intern Program.
 This repository contains all tasks, documentation, and project outputs completed during the internship.
