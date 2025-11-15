@@ -1,4 +1,4 @@
-# Task 1 – Scan Your Local Network for Open Ports
+# Scan Your Local Network for Open Ports
 
 This repository documents the execution of **Task 1** from the Cybersecurity Internship Program of Elevate Labs. The objective of this task is to perform **network reconnaissance**, identify **open ports** on devices in the local network, analyze the **services** behind those ports, and evaluate associated **security risks**.
 
