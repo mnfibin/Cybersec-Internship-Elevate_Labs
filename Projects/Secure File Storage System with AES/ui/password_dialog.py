@@ -1,23 +1,27 @@
-import random, string
+import random
+import string
+
 from PyQt5 import QtCore, QtWidgets
 
 
 def crack_seconds(p):
     pool = 0
-    if any(c.islower() for c in p): pool += 26
-    if any(c.isupper() for c in p): pool += 26
-    if any(c.isdigit() for c in p): pool += 10
-    if any(c in SYMBOLS for c in p): pool += 32
-    if pool == 0: return 0
+    if any(c.islower() for c in p):
+        pool += 26
+    if any(c.isupper() for c in p):
+        pool += 26
+    if any(c.isdigit() for c in p):
+        pool += 10
+    if any(c in SYMBOLS for c in p):
+        pool += 32
+    if pool == 0:
+        return 0
     return (pool ** len(p)) / 2e10
 
 
 SYMBOLS = "!@#$%^&*()-_=+[]{};:,.<>?/"
 
-KEYSET = list(string.ascii_lowercase +
-              string.ascii_uppercase +
-              string.digits +
-              SYMBOLS)
+KEYSET = list(string.ascii_lowercase + string.ascii_uppercase + string.digits + SYMBOLS)
 
 
 class SecureKeyboard(QtWidgets.QWidget):
@@ -60,8 +64,11 @@ class PasswordDialog(QtWidgets.QDialog):
         lay.addWidget(self.input)
 
         self.show = QtWidgets.QCheckBox("Show password")
-        self.show.toggled.connect(lambda v:
-            self.input.setEchoMode(QtWidgets.QLineEdit.Normal if v else QtWidgets.QLineEdit.Password))
+        self.show.toggled.connect(
+            lambda v: self.input.setEchoMode(
+                QtWidgets.QLineEdit.Normal if v else QtWidgets.QLineEdit.Password
+            )
+        )
         lay.addWidget(self.show)
 
         if encryption_mode:
@@ -70,7 +77,9 @@ class PasswordDialog(QtWidgets.QDialog):
             self.state.setStyleSheet("font-size:18px;")
             lay.addWidget(self.state)
 
-            self.indicators = QtWidgets.QLabel("✖ Lowercase   ✖ Uppercase   ✖ Numbers   ✖ Symbols")
+            self.indicators = QtWidgets.QLabel(
+                "✖ Lowercase   ✖ Uppercase   ✖ Numbers   ✖ Symbols"
+            )
             self.indicators.setAlignment(QtCore.Qt.AlignCenter)
             lay.addWidget(self.indicators)
 
@@ -90,7 +99,9 @@ class PasswordDialog(QtWidgets.QDialog):
         self.kbtn.clicked.connect(self.toggle_keyboard)
 
         ok = QtWidgets.QPushButton("OK")
-        ok.setStyleSheet("background:#00c896;color:white;border-radius:10px;padding:12px;")
+        ok.setStyleSheet(
+            "background:#00c896;color:white;border-radius:10px;padding:12px;"
+        )
         ok.clicked.connect(self.accept)
         lay.addWidget(ok)
         self.input.returnPressed.connect(self.accept)
@@ -119,7 +130,7 @@ class PasswordDialog(QtWidgets.QDialog):
         t = crack_seconds(p)
 
         low = any(c.islower() for c in p)
-        up  = any(c.isupper() for c in p)
+        up = any(c.isupper() for c in p)
         num = any(c.isdigit() for c in p)
         sym = any(c in SYMBOLS for c in p)
 
@@ -148,11 +159,20 @@ class PasswordDialog(QtWidgets.QDialog):
             self.state.setText("Very Strong")
             self.input.setStyleSheet(self._style("#00c896"))
 
-        if t < 60: unit="seconds"
-        elif t < 3600: unit="minutes"; t//=60
-        elif t < 86400: unit="hours"; t//=3600
-        elif t < 31536000: unit="days"; t//=86400
-        else: unit="years"; t//=31536000
+        if t < 60:
+            unit = "seconds"
+        elif t < 3600:
+            unit = "minutes"
+            t //= 60
+        elif t < 86400:
+            unit = "hours"
+            t //= 3600
+        elif t < 31536000:
+            unit = "days"
+            t //= 86400
+        else:
+            unit = "years"
+            t //= 31536000
         self.time_lbl.setText(f"Time to crack: {int(t)} {unit}")
 
     def get(self):

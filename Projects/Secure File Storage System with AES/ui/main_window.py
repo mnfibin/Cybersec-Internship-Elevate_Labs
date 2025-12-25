@@ -1,8 +1,10 @@
 import os
+
 from PyQt5 import QtCore, QtGui, QtWidgets
-from core.crypto_engine import encrypt_file, decrypt_file
+
+from core.crypto_engine import decrypt_file, encrypt_file
 from core.lockout import check_lock, record_failure, reset_lock
-from core.metadata import save_meta, load_meta
+from core.metadata import load_meta, save_meta
 from core.secure_delete import secure_delete
 from ui.password_dialog import PasswordDialog
 
@@ -15,7 +17,9 @@ class VaultTile(QtWidgets.QFrame):
         super().__init__()
         self.setAcceptDrops(True)
         self.setCursor(QtCore.Qt.PointingHandCursor)
-        self.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=28, xOffset=0, yOffset=8))
+        self.setGraphicsEffect(
+            QtWidgets.QGraphicsDropShadowEffect(blurRadius=28, xOffset=0, yOffset=8)
+        )
 
         self.icon = QtWidgets.QLabel(icon)
         self.title = QtWidgets.QLabel(title)
@@ -74,17 +78,19 @@ class VaultTile(QtWidgets.QFrame):
 class Main(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-        self.resize(1150,560)
-        self.setWindowTitle("SecureVault")
+        self.resize(1150, 560)
+        self.setWindowTitle("AES Secure Vault")
 
         self.encrypt_tile = VaultTile("ENCRYPT FILE", "Click or drop file here", "🔒")
-        self.decrypt_tile = VaultTile("DECRYPT FILE", "Click or drop encrypted file here", "🔓")
+        self.decrypt_tile = VaultTile(
+            "DECRYPT FILE", "Click or drop encrypted file here", "🔓"
+        )
 
         self.encrypt_tile.setStyleSheet(self.encrypt_tile.normal_style())
         self.decrypt_tile.setStyleSheet(self.decrypt_tile.normal_style())
 
-        self.encrypt_tile.activated.connect(lambda:self.pick(True))
-        self.decrypt_tile.activated.connect(lambda:self.pick(False))
+        self.encrypt_tile.activated.connect(lambda: self.pick(True))
+        self.decrypt_tile.activated.connect(lambda: self.pick(False))
         self.encrypt_tile.dropped.connect(self.encrypt)
         self.decrypt_tile.dropped.connect(self.decrypt)
 
@@ -111,50 +117,66 @@ class Main(QtWidgets.QWidget):
         """)
 
     def pick(self, enc):
-        f,_ = QtWidgets.QFileDialog.getOpenFileName(self,"Select File")
-        if f: self.encrypt(f) if enc else self.decrypt(f)
+        f, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Select File")
+        if f:
+            self.encrypt(f) if enc else self.decrypt(f)
 
     def encrypt(self, path):
         pwd = PasswordDialog(True).get()
-        if not pwd: return
+        if not pwd:
+            return
         data, meta = encrypt_file(path, pwd)
         out = "data/encrypted/" + os.path.basename(path) + ".enc"
-        open(out,"wb").write(data)
-        save_meta(meta,out)
+        open(out, "wb").write(data)
+        save_meta(meta, out)
 
-        wipe = QtWidgets.QMessageBox.question(self,"Secure Delete",
+        wipe = QtWidgets.QMessageBox.question(
+            self,
+            "Secure Delete",
             "Do you want to securely delete the original file?",
-            QtWidgets.QMessageBox.Yes|QtWidgets.QMessageBox.No)
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+        )
         if wipe == QtWidgets.QMessageBox.Yes:
             secure_delete(path)
 
-        QtWidgets.QMessageBox.information(self,"Done","Encrypted successfully")
+        QtWidgets.QMessageBox.information(self, "Done", "Encrypted successfully")
 
     def decrypt(self, path):
         if not path.endswith(".enc"):
-            QtWidgets.QMessageBox.warning(self,"Not Encrypted","Please encrypt this file first.")
+            QtWidgets.QMessageBox.warning(
+                self, "Not Encrypted", "Please encrypt this file first."
+            )
             return
-        try: load_meta(path)
+        try:
+            load_meta(path)
         except:
-            QtWidgets.QMessageBox.warning(self,"Not Encrypted","Encryption metadata missing.")
+            QtWidgets.QMessageBox.warning(
+                self, "Not Encrypted", "Encryption metadata missing."
+            )
             return
 
-        locked,remain = check_lock(path)
+        locked, remain = check_lock(path)
         if locked:
-            QtWidgets.QMessageBox.warning(self,"File Locked",f"Try again after {remain} seconds.")
+            QtWidgets.QMessageBox.warning(
+                self, "File Locked", f"Try again after {remain} seconds."
+            )
             return
 
         pwd = PasswordDialog(False).get()
-        if not pwd: return
+        if not pwd:
+            return
         try:
-            plain = decrypt_file(path,pwd,load_meta(path))
+            plain = decrypt_file(path, pwd, load_meta(path))
             reset_lock(path)
         except:
             record_failure(path)
-            QtWidgets.QMessageBox.critical(self,"Decryption Failed",
-                "Password is incorrect.\nPlease type the correct password.")
+            QtWidgets.QMessageBox.critical(
+                self,
+                "Decryption Failed",
+                "Password is incorrect.\nPlease type the correct password.",
+            )
             return
 
-        out="data/decrypted/"+os.path.basename(path).replace(".enc","")
-        open(out,"wb").write(plain)
-        QtWidgets.QMessageBox.information(self,"Success","Decrypted successfully")
+        out = "data/decrypted/" + os.path.basename(path).replace(".enc", "")
+        open(out, "wb").write(plain)
+        QtWidgets.QMessageBox.information(self, "Success", "Decrypted successfully")
