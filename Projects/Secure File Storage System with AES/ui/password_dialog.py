@@ -7,9 +7,17 @@ def crack_seconds(p):
     if any(c.islower() for c in p): pool += 26
     if any(c.isupper() for c in p): pool += 26
     if any(c.isdigit() for c in p): pool += 10
-    if any(c in "!@#$%^&*()-_=+[{]}:;" for c in p): pool += 32
+    if any(c in SYMBOLS for c in p): pool += 32
     if pool == 0: return 0
     return (pool ** len(p)) / 2e10
+
+
+SYMBOLS = "!@#$%^&*()-_=+[]{};:,.<>?/"
+
+KEYSET = list(string.ascii_lowercase +
+              string.ascii_uppercase +
+              string.digits +
+              SYMBOLS)
 
 
 class SecureKeyboard(QtWidgets.QWidget):
@@ -23,12 +31,16 @@ class SecureKeyboard(QtWidgets.QWidget):
             QPushButton:hover{background:#00c896;color:white;}
         """)
         grid = QtWidgets.QGridLayout(self)
-        keys = list(string.ascii_letters + string.digits + "!@#$%&*")
+
+        keys = KEYSET.copy()
         random.shuffle(keys)
-        for i,k in enumerate(keys):
-            b = QtWidgets.QPushButton(k)
-            b.clicked.connect(lambda _,x=k:self.input.insert(x))
-            grid.addWidget(b,i//10,i%10)
+
+        for i, k in enumerate(keys):
+            b = QtWidgets.QPushButton()
+            # Qt eats & unless escaped
+            b.setText(k.replace("&", "&&"))
+            b.clicked.connect(lambda _, x=k: self.input.insert(x))
+            grid.addWidget(b, i // 10, i % 10)
 
 
 class PasswordDialog(QtWidgets.QDialog):
@@ -109,7 +121,7 @@ class PasswordDialog(QtWidgets.QDialog):
         low = any(c.islower() for c in p)
         up  = any(c.isupper() for c in p)
         num = any(c.isdigit() for c in p)
-        sym = any(c in "!@#$%^&*()-_=+[{]}:;" for c in p)
+        sym = any(c in SYMBOLS for c in p)
 
         self.indicators.setText(
             f"{'✔' if low else '✖'} Lowercase   "
