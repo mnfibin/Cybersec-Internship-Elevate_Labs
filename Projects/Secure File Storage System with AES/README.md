@@ -27,10 +27,51 @@ SecureVault allows you to encrypt and decrypt files locally using AES-256 encryp
 ### Main Vault Interface
 The main interface features two intuitive tiles for encryption and decryption operations with drag-and-drop support.
 
+*Main UI :*
+
+![Main UI](screenshots/main_ui.png)
+
+*Drag and Drop File :*
+
+![Main UI](screenshots/main_ui2.png)
+
+*Delete Original File Dialog :*
+
+![Main UI](screenshots/main_ui3.png)
+
+*Encryption & Decryption Success Message :*
+
+![Main UI](screenshots/main_ui4.png)
+![Main UI](screenshots/main_ui5.png)
+
+*Incorrect Password Decryption Attempt :*
+
+![Main UI](screenshots/main_ui6.png)
+
+*Password Lockout :*
+
+![Main UI](screenshots/main_ui7.png)
+
+
+
 ### Password Security Panel
 Real-time password strength analysis with crack-time estimation, character requirements, and an optional secure keyboard.
 
-*Place your screenshots in the `/screenshots` directory.*
+*Encryption Password Enter Dialog :*
+
+![Password UI](screenshots/password_dialog.png) *Password Strength Analysis :*
+
+![Password UI](screenshots/password_dialog2.png)
+
+
+*Anti-Keylogger Secure Kayboard :*
+
+![Password UI](screenshots/password_dialog3.png)
+
+*Decryption Password Enter Dialog :*
+
+![Password UI](screenshots/password_dialog4.png)
+
 
 ## 🏗️ Architecture
 
@@ -250,3 +291,4 @@ This software is provided for educational and legitimate security purposes only.
 ---
 
 **⭐ If you find this project useful, please consider giving it a star!**
+
