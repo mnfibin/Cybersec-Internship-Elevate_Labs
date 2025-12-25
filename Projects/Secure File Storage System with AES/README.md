@@ -212,7 +212,7 @@ Keys are randomly shuffled with each use.
 ```
 SecureVault/
 ├── core/
-│   ├── crypto_engine.py      # AES-256-GCM encryption/decryption
+│   ├── crypto_engine.py       # AES-256-GCM encryption/decryption
 │   ├── lockout.py             # Bruteforce protection system
 │   ├── metadata.py            # Metadata management
 │   └── secure_delete.py       # Secure file deletion
@@ -224,6 +224,7 @@ SecureVault/
 │   ├── decrypted/             # Decrypted files output
 │   └── lockout/               # Lockout state persistence
 ├── screenshots/               # Application screenshots
+├── reports/                   # Detailed reports
 ├── main.py                    # Application entry point
 ├── requirements.txt           # Python dependencies
 └── README.md                  # This file
@@ -291,4 +292,5 @@ This software is provided for educational and legitimate security purposes only.
 ---
 
 **⭐ If you find this project useful, please consider giving it a star!**
+
 
