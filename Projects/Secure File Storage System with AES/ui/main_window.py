@@ -79,7 +79,7 @@ class Main(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.resize(1150, 560)
-        self.setWindowTitle("AES Secure Vault")
+        self.setWindowTitle("SecureVault")
 
         self.encrypt_tile = VaultTile("ENCRYPT FILE", "Click or drop file here", "🔒")
         self.decrypt_tile = VaultTile(
