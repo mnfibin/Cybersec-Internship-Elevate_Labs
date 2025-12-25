@@ -15,15 +15,17 @@ class VaultTile(QtWidgets.QFrame):
         super().__init__()
         self.setAcceptDrops(True)
         self.setCursor(QtCore.Qt.PointingHandCursor)
-        self.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=25, xOffset=0, yOffset=6))
+        self.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=28, xOffset=0, yOffset=8))
 
         self.icon = QtWidgets.QLabel(icon)
-        self.icon.setAlignment(QtCore.Qt.AlignCenter)
-        self.icon.setStyleSheet("font-size:40px;")
-
         self.title = QtWidgets.QLabel(title)
         self.subtitle = QtWidgets.QLabel(subtitle)
 
+        for lbl in (self.icon, self.title, self.subtitle):
+            lbl.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+            lbl.setStyleSheet("background:transparent;")
+
+        self.icon.setAlignment(QtCore.Qt.AlignCenter)
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.subtitle.setAlignment(QtCore.Qt.AlignCenter)
 
@@ -34,7 +36,8 @@ class VaultTile(QtWidgets.QFrame):
         layout.addStretch()
         layout.addWidget(self.subtitle)
 
-    def mousePressEvent(self, e): self.activated.emit()
+    def mousePressEvent(self, e):
+        self.activated.emit()
 
     def dragEnterEvent(self, e):
         if e.mimeData().hasUrls():
