@@ -1,0 +1,193 @@
+I Summary
+=========
+
+This document reports on the results of an automatic security scan.
+The report first summarises the results found.
+Then, for each host, the report describes every issue found.
+Please consider the advice given in each description, in order to rectify
+the issue.
+
+All dates are displayed using the timezone "Coordinated Universal Time",
+which is abbreviated "UTC".
+
+Vendor security updates are not trusted.
+
+Overrides are off.  Even when a result has an override, this report uses
+the actual threat of the result.
+
+Notes are included in the report.Information on overrides is included in the report.
+
+This report might not show details of all issues that were found.
+Issues with the threat level "Critical" are not shown.
+Issues with the threat level "Log" are not shown.
+Issues with the threat level "Debug" are not shown.
+Issues with the threat level "False Positive" are not shown.
+Only results with a minimum QoD of 70 are shown.
+
+This report contains result 1 of the 1 results selected by the
+filtering above.  Before filtering there were 25 results.
+
+Scan started: Fri Dec 26 05:12:42 2025 UTC
+Scan ended:   Fri Dec 26 05:26:52 2025 UTC
+Task:         Full Vulnerability Scan – Localhost
+
+Host Summary
+************
+
+Host            Critical  High  Medium  Low  Log  False Positive
+127.0.0.1              0     0       1    0    0               0    localhost
+Total: 1               0     0       1    0    0               0
+
+
+II Results per Host
+===================
+
+Host 127.0.0.1
+**************
+
+Scanning of this host started at: Fri Dec 26 05:14:42 2025 UTC
+Number of results: 1
+
+Port Summary for Host 127.0.0.1
+-------------------------------
+
+Service (Port)          Threat Level
+5432/tcp                Medium (CVSS: 5.9)
+
+Security Issues for Host 127.0.0.1
+----------------------------------
+
+Issue
+-----
+NVT:    SSL/TLS: Report Weak Cipher Suites
+OID:    1.3.6.1.4.1.25623.1.0.103440
+Threat: Medium (CVSS: 5.9)
+Port:   5432/tcp
+
+Product detection result: cpe:/a:ietf:transport_layer_security
+Detected by: SSL/TLS: Report Supported Cipher Suites (OID: 1.3.6.1.4.1.25623.1.0.802067)
+
+Summary:
+This routine reports all weak SSL/TLS cipher suites accepted by
+  a service.
+
+Vulnerability Detection Result:
+'Weak' cipher suites accepted by this service via the TLSv1.2 protocol:
+TLS_RSA_WITH_SEED_CBC_SHA
+
+Impact:
+This could allow remote attackers to obtain sensitive information
+  or have other, unspecified impacts.
+
+Solution:
+Solution type: Mitigation
+The configuration of this services should be changed so that it
+  does not accept the listed weak cipher suites anymore.
+  Please see the references for more resources supporting you with this task.
+
+Affected Software/OS:
+All services providing an encrypted communication using weak
+  SSL/TLS cipher suites.
+
+Vulnerability Insight:
+These rules are applied for the evaluation of the cryptographic
+  strength:
+  - RC4 is considered to be weak (CVE-2013-2566, CVE-2015-2808)
+  - Ciphers using 64 bit or less are considered to be vulnerable to brute force !
+methods and
+  therefore considered as weak (CVE-2015-4000)
+  - 1024 bit RSA authentication is considered to be insecure and therefore as we!
+ak
+  - Any cipher considered to be secure for only the next 10 years is considered !
+as medium
+  - Any other cipher is considered as strong
+
+Vulnerability Detection Method:
+Checks previous collected cipher suites.
+  NOTE: No severity for SMTP services with 'Opportunistic TLS' and weak cipher s!
+uites on port 25/tcp
+  is reported. If too strong cipher suites are configured for this service the a!
+lternative would be
+  to fall back to an even more insecure cleartext communication.
+Details:
+SSL/TLS: Report Weak Cipher Suites
+(OID: 1.3.6.1.4.1.25623.1.0.103440)
+Version used: 2025-03-27T05:38:50Z
+
+Product Detection Result:
+Product:cpe:/a:ietf:transport_layer_security
+
+Method:SSL/TLS: Report Supported Cipher Suites
+(OID: 1.3.6.1.4.1.25623.1.0.802067)
+
+References:
+ cve: CVE-2013-2566
+ cve: CVE-2015-2808
+ cve: CVE-2015-4000
+ url: https://ssl-config.mozilla.org
+ url: https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TG02102/BSI-TR-02102-1.html
+ url: https://www.bsi.bund.de/EN/Themen/Oeffentliche-Verwaltung/Mindeststandards/TLS-Protokoll/TLS-Protokoll_node.html
+ url: https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03116/BSI-TR-03116-4.html
+ url: https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Mindeststandards/Mindeststandard_BSI_TLS_Version_2_4.html
+ url: https://web.archive.org/web/20240113175943/https://www.bettercrypto.org
+ url: https://www.enisa.europa.eu/publications/algorithms-key-size-and-parameters-report-2014
+ cert-bund: CB-K21/0067
+ cert-bund: CB-K19/0812
+ cert-bund: CB-K16/1593
+ cert-bund: CB-K16/1552
+ cert-bund: CB-K16/1102
+ cert-bund: CB-K16/0617
+ cert-bund: CB-K16/0599
+ cert-bund: CB-K16/0168
+ cert-bund: CB-K16/0121
+ cert-bund: CB-K16/0090
+ cert-bund: CB-K16/0030
+ dfn-cert: DFN-CERT-2023-2939
+ dfn-cert: DFN-CERT-2021-0775
+ dfn-cert: DFN-CERT-2020-1561
+ dfn-cert: DFN-CERT-2020-1276
+ dfn-cert: DFN-CERT-2017-1821
+ dfn-cert: DFN-CERT-2016-1692
+ dfn-cert: DFN-CERT-2016-1648
+ dfn-cert: DFN-CERT-2016-1168
+ dfn-cert: DFN-CERT-2016-0665
+ dfn-cert: DFN-CERT-2016-0642
+ dfn-cert: DFN-CERT-2016-0184
+ dfn-cert: DFN-CERT-2016-0135
+ dfn-cert: DFN-CERT-2016-0101
+ dfn-cert: DFN-CERT-2016-0035
+ dfn-cert: DFN-CERT-2015-1853
+ dfn-cert: DFN-CERT-2015-1679
+ dfn-cert: DFN-CERT-2015-1632
+ dfn-cert: DFN-CERT-2015-1608
+ dfn-cert: DFN-CERT-2015-1542
+ dfn-cert: DFN-CERT-2015-1518
+ dfn-cert: DFN-CERT-2015-1406
+ dfn-cert: DFN-CERT-2015-1341
+ dfn-cert: DFN-CERT-2015-1194
+ dfn-cert: DFN-CERT-2015-1144
+ dfn-cert: DFN-CERT-2015-1113
+ dfn-cert: DFN-CERT-2015-1078
+ dfn-cert: DFN-CERT-2015-1067
+ dfn-cert: DFN-CERT-2015-1038
+ dfn-cert: DFN-CERT-2015-1016
+ dfn-cert: DFN-CERT-2015-1012
+ dfn-cert: DFN-CERT-2015-0980
+ dfn-cert: DFN-CERT-2015-0977
+ dfn-cert: DFN-CERT-2015-0976
+ dfn-cert: DFN-CERT-2015-0960
+ dfn-cert: DFN-CERT-2015-0956
+ dfn-cert: DFN-CERT-2015-0944
+ dfn-cert: DFN-CERT-2015-0937
+ dfn-cert: DFN-CERT-2015-0925
+ dfn-cert: DFN-CERT-2015-0884
+ dfn-cert: DFN-CERT-2015-0881
+ dfn-cert: DFN-CERT-2015-0879
+ dfn-cert: DFN-CERT-2015-0866
+ dfn-cert: DFN-CERT-2015-0844
+ dfn-cert: DFN-CERT-2015-0800
+ dfn-cert: DFN-CERT-2015-0737
+ dfn-cert: DFN-CERT-2015-0696
+ dfn-cert: DFN-CERT-2014-0977
+
+

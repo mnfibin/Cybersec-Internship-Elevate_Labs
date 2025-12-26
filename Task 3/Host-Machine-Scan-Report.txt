@@ -1,0 +1,155 @@
+I Summary
+=========
+
+This document reports on the results of an automatic security scan.
+The report first summarises the results found.
+Then, for each host, the report describes every issue found.
+Please consider the advice given in each description, in order to rectify
+the issue.
+
+All dates are displayed using the timezone "Coordinated Universal Time",
+which is abbreviated "UTC".
+
+Vendor security updates are not trusted.
+
+Overrides are off.  Even when a result has an override, this report uses
+the actual threat of the result.
+
+Notes are included in the report.Information on overrides is included in the report.
+
+This report might not show details of all issues that were found.
+Issues with the threat level "Critical" are not shown.
+Issues with the threat level "Log" are not shown.
+Issues with the threat level "Debug" are not shown.
+Issues with the threat level "False Positive" are not shown.
+Only results with a minimum QoD of 70 are shown.
+
+This report contains result 1 of the 1 results selected by the
+filtering above.  Before filtering there were 42 results.
+
+Scan started: Fri Dec 26 05:50:33 2025 UTC
+Scan ended:   Fri Dec 26 06:37:50 2025 UTC
+Task:         Full Vulnerability Scan - Host machine from VM
+
+Host Summary
+************
+
+Host            Critical  High  Medium  Low  Log  False Positive
+192.168.XX.XX         0     0       1    0    0               0
+Total: 1               0     0       1    0    0               0
+
+
+II Results per Host
+===================
+
+Host 192.168.XX.XX
+*******************
+
+Scanning of this host started at: Fri Dec 26 05:52:22 2025 UTC
+Number of results: 1
+
+Port Summary for Host 192.168.XX.XX
+------------------------------------
+
+Service (Port)          Threat Level
+135/tcp                 Medium (CVSS: 5.0)
+
+Security Issues for Host 192.168.XX.XX
+---------------------------------------
+
+Issue
+-----
+NVT:    DCE/RPC and MSRPC Services Enumeration Reporting
+OID:    1.3.6.1.4.1.25623.1.0.10736
+Threat: Medium (CVSS: 5.0)
+Port:   135/tcp
+
+Summary:
+Distributed Computing Environment / Remote Procedure Calls
+  (DCE/RPC) or MSRPC based service enumeration reporting.
+
+Vulnerability Detection Result:
+Here is the list of DCE/RPC or MSRPC services running on this host via the TCP p!
+rotocol:
+Port: 49664/tcp
+     UUID: 12345778-1234-abcd-ef00-0123456789ac, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49664]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : SAM access
+     UUID: 51a227ae-825b-41f2-b4a9-1ac9557a1018, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49664]
+     Annotation: Ngc Pop Key Service
+     UUID: 8fb74744-b2ff-4c00-be0d-9ef9a191fe1b, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49664]
+     Annotation: Ngc Pop Key Service
+     UUID: b25a52bf-e5dd-4f4a-aea6-8ca7272a0e86, version 2
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49664]
+     Annotation: KeyIso
+Port: 49665/tcp
+     UUID: d95afe70-a6d5-4259-822e-2c84da1ddb0d, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49665]
+Port: 49666/tcp
+     UUID: 3a9ef155-691d-4449-8d05-09ad57031823, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49666]
+     UUID: 86d35949-83c9-4044-b424-db363231fd0c, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49666]
+Port: 49667/tcp
+     UUID: f6beaff7-1e19-4fbb-9f8f-b89e2018337c, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49667]
+     Annotation: Windows Event Log
+Port: 49668/tcp
+     UUID: 0b6edbfa-4a24-4fc6-8a23-942b1eca65d1, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49668]
+     UUID: 12345678-1234-abcd-ef00-0123456789ab, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49668]
+     Named pipe : spoolss
+     Win32 service or process : spoolsv.exe
+     Description : Spooler service
+     UUID: 4a452661-8290-4b36-8fbe-7f4093a94978, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49668]
+     UUID: 76f03f96-cdfd-44fc-a22c-64950a001209, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49668]
+     UUID: ae33069b-a2a8-46ee-a235-ddfd339be281, version 1
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[49668]
+Port: 50841/tcp
+     UUID: 367abb81-9844-35f1-ad32-98f038001003, version 2
+     Endpoint: ncacn_ip_tcp:192.168.XX.XX[50841]
+Note: DCE/RPC or MSRPC services running on this host locally were identified. Re!
+porting this list is not enabled by default due to the possible large size of th!
+is list. See the script preferences to enable this reporting.
+
+Impact:
+An attacker may use this information to gain more knowledge about
+  the remote host and to conduct further attacks based on it.
+
+Solution:
+Solution type: Mitigation
+Filter incoming traffic to this ports.
+
+Affected Software/OS:
+All systems exposing / disclosing information via DCE/RPC or
+  MSRPC services.
+
+Vulnerability Insight:
+DCE/RPC or MSRPC services running on the remote host can be
+  enumerated by connecting on port 135 and doing the appropriate queries.
+
+Vulnerability Detection Method:
+Reports previously collected (via 'DCE/RPC and MSRPC Services
+  Enumeration' OID: 1.3.6.1.4.1.25623.1.0.108044) DCE/RPC or MSRPC services.
+  This VT is reporting a severity by default. If the scanned network is e.g. a p!
+rivate LAN / private
+  WAN which contains systems not accessible to the public (access restricted) an!
+d it is accepted
+  that the service is disclosing information to this network please set the 'Net!
+work type'
+  configuration of the following VT to e.g. 'Private LAN' or 'Private WAN':
+  Global variable settings (OID: 1.3.6.1.4.1.25623.1.0.12288)
+  In this case a 'Log' level result is used instead.
+Details:
+DCE/RPC and MSRPC Services Enumeration Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.10736)
+Version used: 2025-11-26T05:40:08Z
+
+
