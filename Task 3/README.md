@@ -1,4 +1,4 @@
-# Basic Vulnerability Scan on PC
+# 🔎Basic Vulnerability Scan of PC
 
 ### Objective
 Perform a comprehensive vulnerability assessment using OpenVAS to identify common security vulnerabilities on local systems and understand baseline security posture.
@@ -20,10 +20,15 @@ sudo apt install -y greenbone-community-edition
 sudo gvm-setup
 sudo gvm-start
 ```
+![Task3](screenshots/terminal.png)
 
 ### Access Details
 - **Web Interface**: https://127.0.0.1:9392
 - **Setup Time**: Approximately 45-60 minutes for initial feed download and configuration
+
+![Task3](screenshots/login-gvm.png)
+
+![Task3](screenshots/dashboard.png)
 
 ---
 
@@ -38,6 +43,8 @@ sudo gvm-start
 - **Port List**: All IANA assigned TCP and UDP
 - **Alive Test**: ICMP, TCP-ACK Service & ARP Ping
 
+![Task3](screenshots/localscan1.png)
+
 #### Target 2: Host Machine
 - **IP Address**: 192.168.XX.XXX
 - **Scan Type**: Full and Fast
@@ -45,16 +52,46 @@ sudo gvm-start
 - **Port List**: All IANA assigned TCP and UDP
 - **Alive Test**: ICMP, TCP-ACK Service & ARP Ping
 
+![Task3](screenshots/hostscan1.png)
+
 ### Scan Timeline
 - **Localhost Scan**
   - Started: Fri Dec 26 05:12:42 2025 UTC
   - Ended: Fri Dec 26 05:26:52 2025 UTC
   - Duration: ~14 minutes
 
+![Task3](screenshots/localscan2.png)
+
+![Task3](screenshots/localscan3.png)
+
+![Task3](screenshots/localscan4.png)
+
+![Task3](screenshots/localscan5.png)
+
+![Task3](screenshots/localscan6.png)
+
+![Task3](screenshots/localscan7.png)
+
+![Task3](screenshots/localscan8.png)
+
 - **Host Machine Scan**
   - Started: Fri Dec 26 05:50:33 2025 UTC
   - Ended: Fri Dec 26 06:37:50 2025 UTC
   - Duration: ~47 minutes
+
+![Task3](screenshots/hostscan2.png)
+
+![Task3](screenshots/hostscan3.png)
+
+![Task3](screenshots/hostscan4.png)
+
+![Task3](screenshots/hostscan5.png)
+
+![Task3](screenshots/hostscan6.png)
+
+![Task3](screenshots/hostscan7.png)
+
+![Task3](screenshots/hostscan8.png)
 
 ---
 
@@ -66,6 +103,12 @@ sudo gvm-start
 |------|----------|------|--------|-----|--------------|
 | 127.0.0.1 (Kali VM) | 0 | 0 | 1 | 0 | 1 |
 | 192.168.XX.XXX (Host) | 0 | 0 | 1 | 0 | 1 |
+
+![Task3](screenshots/dashboard-final.png)
+
+### Scan Reports
+- [Kali Linux Localhost Scan Report](Kali-Localhost-Scan-Report.txt)
+- [Host Machine Scan Report](Host-Machine-Scan-Report.txt)
 
 **Key Finding**: No critical or high-severity vulnerabilities detected on either system, indicating a strong baseline security posture.
 
@@ -254,15 +297,6 @@ This is **NOT an exploit vulnerability**. This is an **information disclosure** 
 | Default Credentials | ❌ No | No default credentials in use |
 | Unpatched Software | ❌ No | All software versions current |
 
-### Vulnerability Severity Distribution
-
-```
-Critical: 0  ████████████████████  (0%)
-High:     0  ████████████████████  (0%)
-Medium:   2  ████████████████████  (100%)
-Low:      0  ████████████████████  (0%)
-```
-
 ---
 
 ## Key Findings and Insights
@@ -356,9 +390,3 @@ This exercise provided practical exposure to vulnerability scanning, result inte
 Both systems demonstrate a strong baseline security posture with appropriate controls for their respective roles in a private network environment.
 
 ---
-
-## Appendix
-
-### Scan Reports
-- [Kali Linux Localhost Scan Report](Kali-Localhost-Scan-Report.txt)
-- [Host Machine Scan Report](Host-Machine-Scan-Report.txt)
