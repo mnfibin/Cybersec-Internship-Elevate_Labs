@@ -1,4 +1,4 @@
-# Windows Firewall Configuration and Testing
+# 🧱Windows Firewall Configuration and Testing
 
 ## Objective
 Configure and test basic firewall rules to allow or block traffic on Windows 11 using Windows Defender Firewall with Advanced Security.
@@ -22,6 +22,8 @@ Accessed the Windows Defender Firewall with Advanced Security console:
 
 **Result**: Gained access to Inbound Rules, Outbound Rules, and Monitoring sections.
 
+![Task4](screenshots/run-command.png)
+
 ---
 
 ### Step 2: List Current Firewall Rules
@@ -37,7 +39,9 @@ Reviewed existing firewall rules to understand the current security configuratio
 
 **Purpose**: This step demonstrates awareness of existing firewall configurations before making changes.
 
-**📸 Deliverable**: Screenshot of Inbound Rules listing *(see: `screenshots/01-inbound-rules-list.png`)*
+**📸 Deliverable**: Screenshot of Inbound Rules listing
+
+![Task4](screenshots/01-inbound-rules-list.png)
 
 ---
 
@@ -64,7 +68,13 @@ Created a custom inbound rule to block Telnet traffic on port 23:
 
 **Rationale**: Port 23 (Telnet) transmits data in plaintext and is inherently insecure. Blocking it prevents potential unauthorized access and eavesdropping.
 
-**📸 Deliverable**: Screenshot of the created block rule *(see: `screenshots/02-block-telnet-rule.png`)*
+**📸 Deliverable**: Screenshot of the created block rule
+
+![Task4](screenshots/02-block-telnet-rule.png)
+
+![Task4](screenshots/02.1-block-telnet-rule.png)
+
+![Task4](screenshots/02.2-block-telnet-rule.png)
 
 ---
 
@@ -81,7 +91,13 @@ Verified that the firewall rule effectively blocks Telnet connections:
 
 **Actual Result**: Connection was blocked by the firewall rule, confirming successful implementation.
 
-**📸 Deliverable**: Screenshot of failed Telnet connection attempt *(see: `screenshots/03-telnet-blocked-test.png`)*
+**📸 Deliverable**: Screenshot of failed Telnet connection attempt (Locally Test and Test from Another Machine)
+
+![Task4](screenshots/03-telnet-blocked-test.png)
+
+![Task4](screenshots/03.1-telnet-blocked-test.png)
+
+![Task4](screenshots/03.2-telnet-blocked-test.png)
 
 ---
 
@@ -96,7 +112,11 @@ Examined an existing ALLOW rule to demonstrate how the firewall permits legitima
 
 **Purpose**: This shows the contrast between blocking malicious/unnecessary traffic (Telnet) and allowing legitimate services (Remote Desktop).
 
-**📸 Deliverable**: Screenshot of allow rule properties *(see: `screenshots/04-rdp-allow-rule.png`)*
+**📸 Deliverable**: Screenshot of allow rule properties 
+
+![Task4](screenshots/04-rdp-allow-rule.png)
+
+![Task4](screenshots/04.1-rdp-allow-rule.png)
 
 ---
 
@@ -111,7 +131,9 @@ Cleaned up the test environment by removing the custom block rule:
 
 **Result**: Firewall configuration restored to original state.
 
-**📸 Deliverable**: Screenshot showing rule has been removed *(see: `screenshots/05-rule-removed.png`)*
+**📸 Deliverable**: Screenshot showing rule has been removed
+
+![Task4](screenshots/05-rule-removed.png)
 
 ---
 
@@ -121,9 +143,9 @@ Exported the complete firewall configuration for documentation purposes:
 
 1. Right-clicked "Windows Defender Firewall with Advanced Security"
 2. Selected "Export Policy..."
-3. Saved as `firewall-policy.wfw`
+3. Saved as `firewall-policy.txt`
 
-**📄 Deliverable**: Firewall policy export file *(see: `firewall-policy.wfw`)*
+**📄 Deliverable**: Sample Firewall policy export file *(see: `firewall-policy.txt`)*
 
 ---
 
@@ -241,3 +263,4 @@ This task successfully demonstrated fundamental firewall configuration and testi
 **Security Takeaway**: Properly configured firewalls are essential for protecting systems from unauthorized access. Always block unnecessary ports and services, and regularly audit firewall rules to maintain security posture.
 
 ---
+
