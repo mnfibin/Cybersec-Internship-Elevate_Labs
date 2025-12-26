@@ -213,7 +213,7 @@ Windows Firewall uses stateful packet inspection:
 ## Files in This Repository
 
 ```
-Task4-Firewall-Configuration/
+Task 4
 │
 ├── README.md                          # This file
 ├── firewall-policy.txt                # Exported firewall configuration
@@ -263,4 +263,5 @@ This task successfully demonstrated fundamental firewall configuration and testi
 **Security Takeaway**: Properly configured firewalls are essential for protecting systems from unauthorized access. Always block unnecessary ports and services, and regularly audit firewall rules to maintain security posture.
 
 ---
+
 
